@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParcelPath | Shipping Made Easy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #E6E6FA;
+        }
+
+        header {
+            background-color: #8d72ad;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            font-family: 'Courier New', Courier, monospace;
+            color: #ddcdca;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            padding: 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #f9f9f9;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        select {
+            width: 95%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #6a6fb5;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #512188;
+        }
+
+        .shipment-list {
+            margin-top: 20px;
+        }
+
+        footer {
+            background-color: #8d72ad;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .contact-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+
+        .contact-info {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .map {
+            flex: 1;
+        }
+
+        iframe {
+            width: 100%;
+            height: 200px;
+            /* Decreased height */
+            border: 0;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+
+            .contact-container {
+                flex-direction: column;
+            }
+
+            .contact-info {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">ParcelPath</div>
+        <nav>
+            <ul>
+                <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#create-shipment"><i class="fas fa-plus-circle"></i> Create Shipment</a></li>
+                <li><a href="#track-shipment"><i class="fas fa-search"></i> Track Shipment</a></li>
+                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                <li><a href="#help"><i class="fas fa-question-circle"></i> Help</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home">
+            <div class="container">
+                <h1>
+                    <span style="color: black;">Welcome to</span> <span style="color: #d62708;">ParcelPath!</span> <i
+                        class="fa fa-truck" aria-hidden="true" style="color: black;"></i>
+                </h1>
+                Your Trusted Partner in Shipment Delivery.
+                <p>
+                    Experience seamless shipping with our innovative tools designed to simplify the creation and
+                    tracking of your shipments. Whether you're managing logistics for your business or sending personal
+                    packages, our platform ensures reliability and efficiency at every step. Trust us to streamline your
+                    shipping process and keep you informed every mile of the way.
+                </p>
+            </div>
+        </section>
+
+        <section id="create-shipment">
+            <div class="container">
+                <h1><i class="fa fa-plus-circle" aria-hidden="true"></i> Create New Shipment.</h1>
+                <div class="form-group">
+                    <label for="trackingNumber">Tracking Number</label>
+                    <input type="text" id="trackingNumber" placeholder="Enter tracking number">
+                </div>
+                <div class="form-group">
+                    <label for="sender">Sender</label>
+                    <input type="text" id="sender" placeholder="Enter sender name">
+                </div>
+                <div class="form-group">
+                    <label for="recipient">Recipient</label>
+                    <input type="text" id="recipient" placeholder="Enter recipient name">
+                </div>
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select id="status">
+                        <option value="Pending">Pending</option>
+                        <option value="In Transit">In Transit</option>
+                        <option value="Delivered">Delivered</option>
+                    </select>
+                </div>
+                <button class="btn" onclick="createShipment()">Create Shipment</button>
+
+                <div class="shipment-list" id="shipmentList">
+                    <!-- Shipments will be listed here -->
+                </div>
+            </div>
+        </section>
+
+        <section id="track-shipment">
+            <div class="container">
+                <h1><i class="fas fa-search"></i> Track Your Shipment.</h1>
+                <form id="tracking-form">
+                    <div class="form-group">
+                        <label for="tracking-number">Tracking Number</label>
+                        <input type="text" id="tracking-number" placeholder="Enter Tracking Number" required>
+                    </div>
+                    <button type="submit">Track</button>
+                </form>
+                <div id="tracking-result"></div>
+            </div>
+        </section>
+
+        <section id="help">
+            <div class="container">
+                <h1><i class="fas fa-question-circle"></i> Help</h1>
+                <p>If you need assistance in using our website and the process of shipment & tracking, please contact
+                    our support team at support@reyanshparcelpath.com. We will love to help you out.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-container">
+            <div class="contact-info">
+                <h2><i class="fa fa-address-card" aria-hidden="true"
+                        style="font-size: 25px; margin-right: 10px"></i>Contact Us!</h2>
+                <p>Email: reyansh170@gmail.com</p>
+                <p>Phone No.: +91 9508776228</p>
+                <p>Address: Patna, Bihar IN</p>
+            </div>
+            <div class="map">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.023659360077!2d85.07222461544669!3d25.60777558387415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399e5e53b7b4c6f3%3A0xb1e16c07d5ac8e5e!2sPatna%2C%20Bihar%2C%20India!5e0!3m2!1sen!2sus!4v1633602492490!5m2!1sen!2sus"
+                    allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p> <i class="fa fa-registered" aria-hidden="true"></i> Reyansh || All Rights Reserved &copy; ParcelPath 2024
+        </p>
+    </footer>
+
+    <script>
+        function createShipment() {
+            // Implementation of shipment creation logic
+        }
+
+        document.getElementById('tracking-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            // Implementation of shipment tracking logic
+        });
+    </script>
+</body>
+
+</html>
